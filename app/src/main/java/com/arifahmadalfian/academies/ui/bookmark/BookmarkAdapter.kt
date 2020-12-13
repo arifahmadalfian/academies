@@ -13,9 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import java.util.*
 
 
-class BookmarkAdapter(
-        private val callback: IBookmarkFragmentCallback
-): RecyclerView.Adapter<BookmarkAdapter.CourseViewHolder>() {
+class BookmarkAdapter(private val callback: IBookmarkFragmentCallback): RecyclerView.Adapter<BookmarkAdapter.CourseViewHolder>() {
 
     private val listCourses = ArrayList<CourseEntity>()
 

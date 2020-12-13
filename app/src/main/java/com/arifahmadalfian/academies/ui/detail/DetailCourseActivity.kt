@@ -66,10 +66,11 @@ class DetailCourseActivity : AppCompatActivity() {
         detailContentBinding.textDate.text = resources.getString(R.string.deadline_date, courseEntity.deadline)
 
         Glide.with(this)
-                .load(courseEntity.imagePath)
-                .transform(RoundedCorners(20))
-                .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_erorr))
-                .into(detailContentBinding.imagePoster)
+            .load(courseEntity.imagePath)
+            .transform(RoundedCorners(20))
+            .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)
+                .error(R.drawable.ic_erorr))
+            .into(detailContentBinding.imagePoster)
 
         detailContentBinding.btnStart.setOnClickListener {
             val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java)

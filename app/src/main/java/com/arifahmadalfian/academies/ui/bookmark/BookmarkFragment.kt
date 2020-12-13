@@ -16,10 +16,8 @@ class BookmarkFragment : Fragment(), IBookmarkFragmentCallback {
 
     lateinit var fragmentBookmarkBinding: FragmentBookmarkBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         fragmentBookmarkBinding = FragmentBookmarkBinding.inflate(inflater, container, false)
         return fragmentBookmarkBinding.root
@@ -45,12 +43,11 @@ class BookmarkFragment : Fragment(), IBookmarkFragmentCallback {
         if (activity != null) {
             val mimeType = "text/plain"
             ShareCompat.IntentBuilder
-                    .from(requireActivity())
-                    .setType(mimeType)
-                    .setChooserTitle("Bagikan aplikasi ini sekarang.")
-                    .setText(resources.getString(R.string.share_text, course.title))
-                    .startChooser()
+                .from(requireActivity())
+                .setType(mimeType)
+                .setChooserTitle("Bagikan aplikasi ini sekarang.")
+                .setText(resources.getString(R.string.share_text, course.title))
+                .startChooser()
         }
     }
-
 }

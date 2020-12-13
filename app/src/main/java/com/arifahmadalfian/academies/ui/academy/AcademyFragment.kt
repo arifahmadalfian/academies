@@ -14,10 +14,8 @@ class AcademyFragment : Fragment() {
 
     private lateinit var fragmentAcademyBinding: FragmentAcademyBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         fragmentAcademyBinding = FragmentAcademyBinding.inflate(layoutInflater, container, false)
         return fragmentAcademyBinding.root
     }
@@ -27,12 +25,12 @@ class AcademyFragment : Fragment() {
         if (activity != null) {
             val courses = DataDummy.generateDummyCourses()
             val academyAdapter = AcademyAdapter()
-            academyAdapter.setCourse(courses)
+            academyAdapter.setCourses(courses)
 
             with(fragmentAcademyBinding.rvAcademy) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                this.adapter = academyAdapter
+                adapter = academyAdapter
             }
         }
     }
