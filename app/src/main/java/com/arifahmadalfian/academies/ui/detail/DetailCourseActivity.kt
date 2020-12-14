@@ -3,10 +3,13 @@ package com.arifahmadalfian.academies.ui.detail
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arifahmadalfian.academies.R
 import com.arifahmadalfian.academies.data.CourseEntity
+import com.arifahmadalfian.academies.data.ModuleEntity
 import com.arifahmadalfian.academies.databinding.ActivityDetailCourseBinding
 import com.arifahmadalfian.academies.databinding.ContentDetailCourseBinding
 import com.arifahmadalfian.academies.ui.reader.CourseReaderActivity
@@ -35,18 +38,17 @@ class DetailCourseActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapter = DetailCourseAdapter()
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
-                val modules = DataDummy.generateDummyModules(courseId)
+                viewModel.setSelectedCourse(courseId)
+                val modules: List<ModuleEntity> = viewModel.getModules()
+
                 adapter.setModules(modules)
-                for (course in DataDummy.generateDummyCourses()) {
-                    if (course.courseId == courseId) {
-                        populateCourse(course)
-                    }
-                }
+                populateCourse(viewModel.getCourse())
             }
         }
 

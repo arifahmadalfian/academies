@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.arifahmadalfian.academies.R
 import com.arifahmadalfian.academies.data.ContentEntity
+import com.arifahmadalfian.academies.data.ModuleEntity
 import com.arifahmadalfian.academies.databinding.FragmentModuleContentBinding
+import com.arifahmadalfian.academies.ui.reader.CourseReaderViewModel
 
 
 class ModuleContentFragment : Fragment() {
@@ -30,13 +33,15 @@ class ModuleContentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val content = ContentEntity("<h3 class =\\\"fr-text-bordered\\\">Contoh Content</h3><p>Lorem ipsum dolor sit amet, consecterur adipiscing elit, sed do eiusmod tempor incidudunt ut labore et dolore magna aliqua. Ut enim ad minim vveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea dommodo consequat. duis aute irure dolor in reprehenderi in voluptate velit esse cillum dolore eu fugiat nulla pariatur . Excepterur sint occaecat cupidatat non proident, sunt in culpa qui officia deseruuunt mollit anikm id est laborum .</p>")
-            populateWebView(content)
+            val viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
+            val module = viewModel.getSelectedModule()
+
+            populateWebView(module)
         }
     }
 
-    private fun populateWebView(content: ContentEntity) {
-        fragmentModuleContentBinding.webView.loadData(content.content ?: "", "text/html", "UTF-8")
+    private fun populateWebView(module: ModuleEntity) {
+        fragmentModuleContentBinding.webView.loadData(module.contentEntity?.content ?: "", "text/html", "UTF-8")
     }
 
 }
