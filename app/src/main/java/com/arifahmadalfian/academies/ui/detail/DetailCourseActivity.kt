@@ -14,6 +14,7 @@ import com.arifahmadalfian.academies.databinding.ActivityDetailCourseBinding
 import com.arifahmadalfian.academies.databinding.ContentDetailCourseBinding
 import com.arifahmadalfian.academies.ui.reader.CourseReaderActivity
 import com.arifahmadalfian.academies.utils.DataDummy
+import com.arifahmadalfian.academies.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -38,7 +39,8 @@ class DetailCourseActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapter = DetailCourseAdapter()
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
