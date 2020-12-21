@@ -6,7 +6,7 @@ import com.arifahmadalfian.academies.data.source.remote.RemoteDataSource
 import com.arifahmadalfian.academies.utils.JsonHelper
 
 object Injection {
-    fun privideRepository(context: Context): AcademyRepository {
+    fun provideRepository(context: Context): AcademyRepository {
         val remoteDataSource = RemoteDataSource.getInstance(JsonHelper(context))
 
         return AcademyRepository.getInstance(remoteDataSource)
