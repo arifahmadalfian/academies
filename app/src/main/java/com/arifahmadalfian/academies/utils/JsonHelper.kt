@@ -1,12 +1,14 @@
 package com.arifahmadalfian.academies.utils
 
 import android.content.Context
+import android.util.Log
 import com.arifahmadalfian.academies.data.source.remote.response.ContentResponse
 import com.arifahmadalfian.academies.data.source.remote.response.CourseResponse
 import com.arifahmadalfian.academies.data.source.remote.response.ModuleResponse
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+import java.util.ArrayList
 
 class JsonHelper(private val context: Context) {
 
@@ -17,6 +19,7 @@ class JsonHelper(private val context: Context) {
             `is`.read(buffer)
             `is`.close()
             String(buffer)
+
         } catch (ex: IOException) {
             ex.printStackTrace()
             null
@@ -26,7 +29,7 @@ class JsonHelper(private val context: Context) {
     fun loadCourses(): List<CourseResponse> {
         val list = ArrayList<CourseResponse>()
         try {
-            val responseObject = JSONObject(parsingFileToString("CourseResponse.json").toString())
+            val responseObject = JSONObject(parsingFileToString("CourseResponses.json").toString())
             val listArray = responseObject.getJSONArray("courses")
             for (i in 0 until listArray.length()) {
                 val course = listArray.getJSONObject(i)
@@ -43,7 +46,6 @@ class JsonHelper(private val context: Context) {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-
         return list
     }
 
