@@ -2,6 +2,7 @@ package com.arifahmadalfian.academies.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -46,11 +47,23 @@ class DetailCourseActivity : AppCompatActivity() {
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
-                viewModel.setSelectedCourse(courseId)
-                val modules: List<ModuleEntity> = viewModel.getModules()
 
-                adapter.setModules(modules)
-                populateCourse(viewModel.getCourse())
+                activityDetailCourseBinding.progressBar.visibility = View.VISIBLE
+                activityDetailCourseBinding.content.visibility = View.INVISIBLE
+
+                viewModel.setSelectedCourse(courseId)
+                viewModel.getModules().observe(this, {modules ->
+                    activityDetailCourseBinding.progressBar.visibility = View.GONE
+                    activityDetailCourseBinding.content.visibility = View.VISIBLE
+
+                    adapter.setModules(modules)
+                    adapter.notifyDataSetChanged()
+                })
+                viewModel.getCourse().observe(this, {course ->
+                    activityDetailCourseBinding.progressBar.visibility = View.GONE
+
+                    populateCourse(course)
+                })
             }
         }
 
