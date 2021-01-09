@@ -2,15 +2,16 @@ package com.arifahmadalfian.academies.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.arifahmadalfian.academies.data.ContentEntity
-import com.arifahmadalfian.academies.data.CourseEntity
-import com.arifahmadalfian.academies.data.ModuleEntity
+import com.arifahmadalfian.academies.data.AcademyDataSource
+import com.arifahmadalfian.academies.data.source.local.entity.ContentEntity
+import com.arifahmadalfian.academies.data.source.local.entity.CourseEntity
+import com.arifahmadalfian.academies.data.source.local.entity.ModuleEntity
 import com.arifahmadalfian.academies.data.source.remote.RemoteDataSource
 import com.arifahmadalfian.academies.data.source.remote.response.ContentResponse
 import com.arifahmadalfian.academies.data.source.remote.response.CourseResponse
 import com.arifahmadalfian.academies.data.source.remote.response.ModuleResponse
 
-class FakeAcademyRepository(private val remoteDataSource: RemoteDataSource): AcademyDataSource{
+class FakeAcademyRepository(private val remoteDataSource: RemoteDataSource): AcademyDataSource {
 
     override fun getAllCourses(): LiveData<List<CourseEntity>> {
         val courseResults = MutableLiveData<List<CourseEntity>>()

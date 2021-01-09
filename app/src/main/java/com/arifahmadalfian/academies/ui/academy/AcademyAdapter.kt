@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arifahmadalfian.academies.R
-import com.arifahmadalfian.academies.data.CourseEntity
+import com.arifahmadalfian.academies.data.source.local.entity.CourseEntity
 import com.arifahmadalfian.academies.databinding.ItemsAcademyBinding
 import com.arifahmadalfian.academies.ui.detail.DetailCourseActivity
 import com.bumptech.glide.Glide

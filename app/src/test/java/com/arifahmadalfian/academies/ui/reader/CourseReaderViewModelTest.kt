@@ -3,9 +3,9 @@ package com.arifahmadalfian.academies.ui.reader
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.arifahmadalfian.academies.data.ContentEntity
-import com.arifahmadalfian.academies.data.ModuleEntity
-import com.arifahmadalfian.academies.data.source.AcademyRepository
+import com.arifahmadalfian.academies.data.source.local.entity.ContentEntity
+import com.arifahmadalfian.academies.data.source.local.entity.ModuleEntity
+import com.arifahmadalfian.academies.data.AcademyRepository
 import com.arifahmadalfian.academies.utils.DataDummy
 import org.junit.Assert.*
 import org.junit.Before

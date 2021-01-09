@@ -3,8 +3,8 @@ package com.arifahmadalfian.academies.ui.academy
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.arifahmadalfian.academies.data.CourseEntity
-import com.arifahmadalfian.academies.data.source.AcademyRepository
+import com.arifahmadalfian.academies.data.source.local.entity.CourseEntity
+import com.arifahmadalfian.academies.data.AcademyRepository
 import com.arifahmadalfian.academies.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -14,7 +14,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 

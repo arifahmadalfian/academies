@@ -9,9 +9,8 @@ import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arifahmadalfian.academies.R
-import com.arifahmadalfian.academies.data.CourseEntity
+import com.arifahmadalfian.academies.data.source.local.entity.CourseEntity
 import com.arifahmadalfian.academies.databinding.FragmentBookmarkBinding
-import com.arifahmadalfian.academies.utils.DataDummy
 import com.arifahmadalfian.academies.viewmodel.ViewModelFactory
 
 class BookmarkFragment : Fragment(), IBookmarkFragmentCallback {

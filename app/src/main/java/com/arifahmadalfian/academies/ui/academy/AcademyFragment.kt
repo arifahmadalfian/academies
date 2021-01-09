@@ -5,21 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arifahmadalfian.academies.databinding.FragmentAcademyBinding
 import com.arifahmadalfian.academies.utils.DataDummy
 import com.arifahmadalfian.academies.viewmodel.ViewModelFactory
+import com.arifahmadalfian.academies.vo.Status
 
 
 class AcademyFragment : Fragment() {
 
-    private lateinit var fragmentAcademyBinding: FragmentAcademyBinding
+    private var fragmentAcademyBinding: FragmentAcademyBinding? = null
+    private val binding = fragmentAcademyBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         fragmentAcademyBinding = FragmentAcademyBinding.inflate(layoutInflater, container, false)
-        return fragmentAcademyBinding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,19 +30,30 @@ class AcademyFragment : Fragment() {
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[AcademyViewModel::class.java]
-            val academyAdapter = AcademyAdapter()
 
-            fragmentAcademyBinding.progressBar.visibility = View.VISIBLE
+            val academyAdapter = AcademyAdapter()
             viewModel.getCourses().observe(viewLifecycleOwner, { courses ->
-                fragmentAcademyBinding.progressBar.visibility = View.GONE
-                academyAdapter.setCourses(courses)
-                academyAdapter.notifyDataSetChanged()
+                if (courses != null) {
+                    when (courses.status) {
+                        Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            academyAdapter.setCourses(courses.data)
+                            academyAdapter.notifyDataSetChanged()
+                        }
+                        Status.ERROR -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            Toast.makeText(context, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
             })
 
-            with(fragmentAcademyBinding.rvAcademy) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = academyAdapter
+            with(binding?.rvAcademy) {
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = academyAdapter
             }
         }
     }

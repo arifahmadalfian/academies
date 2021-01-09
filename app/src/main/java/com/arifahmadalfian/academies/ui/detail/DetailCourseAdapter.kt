@@ -3,7 +3,7 @@ package com.arifahmadalfian.academies.ui.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.arifahmadalfian.academies.data.ModuleEntity
+import com.arifahmadalfian.academies.data.source.local.entity.ModuleEntity
 import com.arifahmadalfian.academies.databinding.ItemsModuleListBinding
 import java.util.*
 
