@@ -22,7 +22,7 @@ class ModuleContentFragment : Fragment() {
     }
 
     private var fragmentModuleContentBinding: FragmentModuleContentBinding? = null
-    private val binding = fragmentModuleContentBinding
+    private val binding get() = fragmentModuleContentBinding
 
     private lateinit var viewModel: CourseReaderViewModel
 

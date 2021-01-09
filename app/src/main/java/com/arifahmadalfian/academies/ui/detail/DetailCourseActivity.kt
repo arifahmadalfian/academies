@@ -30,7 +30,7 @@ class DetailCourseActivity : AppCompatActivity() {
 
     private lateinit var detailContentBinding: ContentDetailCourseBinding
     private var activityDetailCourseBinding: ActivityDetailCourseBinding? = null
-    private val mainBinding = activityDetailCourseBinding
+    private val mainBinding get() = activityDetailCourseBinding
 
     private lateinit var viewModel: DetailCourseViewModel
     private var menu: Menu? = null
@@ -69,7 +69,7 @@ class DetailCourseActivity : AppCompatActivity() {
                                 populateCourse(courseWithModuleResource.data.mCourse)
                             }
                             Status.ERROR -> {
-                                mainBinding.progressBar.visibility = View.GONE
+                                mainBinding?.progressBar?.visibility = View.GONE
                                 Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                             }
                         }

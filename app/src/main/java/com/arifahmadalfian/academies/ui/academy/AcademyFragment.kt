@@ -17,7 +17,7 @@ import com.arifahmadalfian.academies.vo.Status
 class AcademyFragment : Fragment() {
 
     private var fragmentAcademyBinding: FragmentAcademyBinding? = null
-    private val binding = fragmentAcademyBinding
+    private val binding get() = fragmentAcademyBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

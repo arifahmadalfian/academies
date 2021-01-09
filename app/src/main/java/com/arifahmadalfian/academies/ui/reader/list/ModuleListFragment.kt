@@ -27,7 +27,7 @@ class ModuleListFragment : Fragment(), IMyAdapterClickListener {
     private lateinit var viewModel: CourseReaderViewModel
 
     private var fragmentModuleListBinding: FragmentModuleListBinding? = null
-    private val binding = fragmentModuleListBinding
+    private val binding get() = fragmentModuleListBinding
     private lateinit var adapter: ModuleListAdapter
     private lateinit var courseReaderCallback: ICourseReaderCallback
 

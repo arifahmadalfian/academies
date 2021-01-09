@@ -15,13 +15,14 @@ import com.arifahmadalfian.academies.viewmodel.ViewModelFactory
 
 class BookmarkFragment : Fragment(), IBookmarkFragmentCallback {
 
-    lateinit var fragmentBookmarkBinding: FragmentBookmarkBinding
+    private var fragmentBookmarkBinding: FragmentBookmarkBinding? = null
+    private val binding get() = fragmentBookmarkBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         fragmentBookmarkBinding = FragmentBookmarkBinding.inflate(inflater, container, false)
-        return fragmentBookmarkBinding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,17 +34,17 @@ class BookmarkFragment : Fragment(), IBookmarkFragmentCallback {
 
             val adapter = BookmarkAdapter(this)
 
-            fragmentBookmarkBinding.progressBar.visibility = View.VISIBLE
+            binding?.progressBar?.visibility = View.VISIBLE
             viewModel.getBookmark().observe(viewLifecycleOwner, {courses ->
-                fragmentBookmarkBinding.progressBar.visibility = View.GONE
+                binding?.progressBar?.visibility = View.GONE
                 adapter.setCourses(courses)
                 adapter.notifyDataSetChanged()
             })
 
-            with(fragmentBookmarkBinding.rvBookmark) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                this.adapter = adapter
+            with(binding?.rvBookmark) {
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = adapter
             }
         }
     }
