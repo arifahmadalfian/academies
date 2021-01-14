@@ -47,4 +47,5 @@ ext {
     recyclerViewVersion = '1.1.0'
     roomVersion = '2.2.3'
     roomRuntimeVersion = '2.2.5'
+    pagingVersion = '2.1.1'
 }
