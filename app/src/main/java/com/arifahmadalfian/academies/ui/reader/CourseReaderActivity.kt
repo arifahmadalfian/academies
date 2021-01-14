@@ -56,7 +56,9 @@ class CourseReaderActivity : AppCompatActivity(), ICourseReaderCallback {
             }
             fragmentTransaction.commit()
         } else {
+
             var fragmentList = supportFragmentManager.findFragmentByTag(ModuleListFragment.TAG)
+
             if (fragmentList == null) {
                 fragmentList = ModuleListFragment.newInstance()
                 fragmentTransaction.add(R.id.frame_list, fragmentList, ModuleListFragment.TAG)
@@ -68,15 +70,15 @@ class CourseReaderActivity : AppCompatActivity(), ICourseReaderCallback {
                 fragmentTransaction.add(R.id.frame_content, fragmentContent, ModuleContentFragment.TAG)
             }
             fragmentTransaction.commit()
-
         }
+
     }
 
     private fun removeObserver() {
         viewModel.modules.removeObserver(initObserver)
     }
 
-    private fun getLastReadFromModule(moduleEntities: List<ModuleEntity>): String? {
+    private fun getLastReadFromModules(moduleEntities: List<ModuleEntity>): String? {
         var lastReadModule: String? = null
         for (moduleEntitiy in moduleEntities) {
             if (moduleEntitiy.read) {
@@ -96,7 +98,8 @@ class CourseReaderActivity : AppCompatActivity(), ICourseReaderCallback {
                 }
                 Status.SUCCESS -> {
                     val dataModules: List<ModuleEntity>? = modules.data
-                    if(dataModules != null && dataModules.isNotEmpty()) {
+                    if (dataModules != null && dataModules.isNotEmpty()) {
+
                         val firstModule = dataModules[0]
                         val isFirstModuleRead = firstModule.read
 
@@ -104,7 +107,8 @@ class CourseReaderActivity : AppCompatActivity(), ICourseReaderCallback {
                             val firstModuleId = firstModule.moduleId
                             viewModel.setSelectedModule(firstModuleId)
                         } else {
-                            val lastReadModuleId = getLastReadFromModule(dataModules)
+
+                            val lastReadModuleId = getLastReadFromModules(dataModules)
                             if (lastReadModuleId != null) {
                                 viewModel.setSelectedModule(lastReadModuleId)
                             }
