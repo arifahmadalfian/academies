@@ -3,6 +3,8 @@ package com.arifahmadalfian.academies.ui.bookmark
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arifahmadalfian.academies.R
 import com.arifahmadalfian.academies.data.source.local.entity.CourseEntity
@@ -13,16 +15,21 @@ import com.bumptech.glide.request.RequestOptions
 import java.util.*
 
 
-class BookmarkAdapter(private val callback: IBookmarkFragmentCallback): RecyclerView.Adapter<BookmarkAdapter.CourseViewHolder>() {
+class BookmarkAdapter(
+    private val callback: IBookmarkFragmentCallback
+): PagedListAdapter<CourseEntity,BookmarkAdapter.CourseViewHolder>(DIFF_CALLBACK) {
 
-    private val listCourses = ArrayList<CourseEntity>()
+    companion object {
+        private val DIFF_CALLBACK = object: DiffUtil.ItemCallback<CourseEntity>() {
+            override fun areItemsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
+                return oldItem.courseId == newItem.courseId
+            }
 
-    fun setCourses(courses: List<CourseEntity>?) {
-        if (courses == null) return
-        this.listCourses.clear()
-        this.listCourses.addAll(courses)
+            override fun areContentsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
+                return oldItem == newItem
+            }
 
-        this.notifyDataSetChanged()
+        }
     }
 
     inner class CourseViewHolder(private val binding: ItemsBookmarkBinding): RecyclerView.ViewHolder(binding.root) {
@@ -50,9 +57,14 @@ class BookmarkAdapter(private val callback: IBookmarkFragmentCallback): Recycler
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        val course = listCourses[position]
-        holder.bind(course)
+        val course = getItem(position)
+        if (course != null) {
+            holder.bind(course)
+        }
     }
 
-    override fun getItemCount(): Int = listCourses.size
+    fun getSwiftData(swipedPosition: Int): CourseEntity? {
+        return getItem(swipedPosition)
+    }
+
 }
